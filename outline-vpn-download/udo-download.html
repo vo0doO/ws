@@ -1,0 +1,638 @@
+            <dom-module id="udo-os-selector">
+                <template>
+                    <style include="udo-styles">
+                        input[type="radio"] {
+                            display: none;
+                        }
+
+                        input[type="radio"]+label {
+                            display: inline-block;
+                            opacity: 0.5;
+                            width: 33%;
+                        }
+
+                        input[type="radio"]+label {
+                            text-align: center;
+                            cursor: pointer;
+                            margin-top: 36px;
+                        }
+
+                        input[type="radio"]:checked+label {
+                            opacity: 1;
+                        }
+
+                        input[type="radio"]+label:not(:last-child) {
+                        }
+
+                        .osName {
+                            font-size: 14px;
+                            font-weight: 400;
+                            color: #fff;
+                        }
+
+                        .osName {
+                            margin-top: 6px;
+                        }
+
+                        #itemWrapper {
+                            display: flex;
+                            flex-direction: row;
+                            flex-wrap: wrap;
+                            width: 100%;
+                        }
+
+                        :host(:dir(ltr)) #itemWrapper {
+                            text-align: left;
+                        }
+
+                        :host(:dir(rtl)) #itemWrapper {
+                            text-align: right;
+                        }
+
+                        @media (max-width: 599px) {
+                            input[type="radio"]+label {
+                                width:50%;
+                            }
+
+                            input[type="radio"]+label {
+                                margin-bottom: 20px;
+                            }
+                        }
+                    </style>
+                    <div id="itemWrapper">
+                        <template is="dom-repeat" items="[[osOptions]]">
+                            <input type="radio" id$="[[uniqueId]]-[[item.id]]" name$="[[uniqueId]]osOptions" on-change="onSelected" checked$="[[isEqual(item.id, selectedOsId)]]">
+                            <label for$="[[uniqueId]]-[[item.id]]">
+                                <img src$="[[getImage(item.id)]]">
+                                <div class="osName">[[item.name]]</div>
+                            </label>
+                        </template>
+                    </div>
+                </template>
+                <script>
+                    var UdoOsSelector = function(_Polymer$DirMixin) {
+                        babelHelpers.inherits(UdoOsSelector, _Polymer$DirMixin);
+                        function UdoOsSelector() {
+                            babelHelpers.classCallCheck(this, UdoOsSelector);
+                            return babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(UdoOsSelector).apply(this, arguments))
+                        }
+                        babelHelpers.createClass(UdoOsSelector, [{
+                            key: "ready",
+                            value: function ready() {
+                                babelHelpers.get(babelHelpers.getPrototypeOf(UdoOsSelector.prototype), "ready", this).call(this);
+                                this.uniqueId = Math.random().toString()
+                            }
+                        }, {
+                            key: "getImage",
+                            value: function getImage(id) {
+                                var file = {
+                                    macOS: "platform-apple.svg",
+                                    iOS: "platform-apple.svg",
+                                    Android: "platform-android.svg",
+                                    Windows: "platform-windows.svg",
+                                    Linux: "platform-linux.svg",
+                                    "Chromium OS": "platform-chrome.svg"
+                                }[id];
+                                if (!file) {
+                                    return ""
+                                }
+                                if (this.useBlackImages) {
+                                    file = file.replace(".svg", "-black.svg")
+                                }
+                                return this.imagesPath + file
+                            }
+                        }, {
+                            key: "onSelected",
+                            value: function onSelected(event) {
+                                this.select(event.model.item.id)
+                            }
+                        }, {
+                            key: "select",
+                            value: function select(id) {
+                                for (var i = 0; i < this.osOptions.length; ++i) {
+                                    if (this.osOptions[i].id === id) {
+                                        this.selectedOsId = id;
+                                        this.dispatchEvent(new CustomEvent("osSelected",{
+                                            detail: {
+                                                id: id
+                                            }
+                                        }));
+                                        return
+                                    }
+                                }
+                            }
+                        }, {
+                            key: "isEqual",
+                            value: function isEqual(a, b) {
+                                return a === b
+                            }
+                        }], [{
+                            key: "is",
+                            get: function get() {
+                                return "udo-os-selector"
+                            }
+                        }, {
+                            key: "properties",
+                            get: function get() {
+                                return {
+                                    uniqueId: String,
+                                    localize: Function,
+                                    imagesPath: String,
+                                    selectedOsId: String,
+                                    osOptions: Array,
+                                    useBlackImages: Boolean
+                                }
+                            }
+                        }]);
+                        return UdoOsSelector
+                    }(Polymer.DirMixin(Polymer.Element));
+                    window.customElements.define(UdoOsSelector.is, UdoOsSelector);
+                </script>
+            </dom-module>
+        </div>
+        <dom-module id="udo-download">
+            <template>
+                <style include="udo-styles"></style>
+                <style>
+                    .contentWrapper {
+                        width: 90%;
+                        max-width: 1280px;
+                    }
+
+                    .contentWrapper {
+                        margin: 0 auto;
+                    }
+
+                    .flexGrid {
+                        display: flex;
+                        flex-direction: column;
+                        flex-wrap: wrap;
+                    }
+
+                    .item {
+                        width: 100%;
+                    }
+
+                    :host(:dir(ltr)) .item {
+                        text-align: left;
+                    }
+
+                    :host(:dir(rtl)) .item {
+                        text-align: right;
+                    }
+
+                    .itemWrapperForIEAndFF {
+                        width: 100%;
+                        vertical-align: top;
+                    }
+
+                    .itemWrapperForIEAndFF {
+                        padding: 5% 0;
+                    }
+
+                    a.buttonLink {
+                        text-decoration: none;
+                        display: block;
+                    }
+
+                    a.buttonLink {
+                        margin: 56px 0 15px 0;
+                        border-bottom: none;
+                    }
+
+                    #managerDownloadButton, #clientDownloadButton {
+                        text-decoration: none;
+                        width: 100%;
+                        color: var(--app-primary-color);
+                        font-size: 14px;
+                        font-weight: 500;
+                    }
+
+                    #managerDownloadButton, #clientDownloadButton {
+                        background: var(--app-teal-color);
+                    }
+
+                    h3 {
+                        font-size: 14px;
+                        font-weight: 400;
+                        color: #fff;
+                    }
+
+                    h3 {
+                        text-align: center;
+                        margin: 0;
+                        padding: 28px 0;
+                    }
+
+                    h4 {
+                        font-weight: normal;
+                        font-size: 28px;
+                        font-weight: 500;
+                        color: #ECEFF1;
+                        line-height: 1.25em;
+                    }
+
+                    h4 {
+                        text-align: center;
+                    }
+
+                    :host(:dir(ltr)) h4 {
+                        text-align: left;
+                    }
+
+                    :host(:dir(rtl)) h4 {
+                        text-align: right;
+                    }
+
+                    h4 + p {
+                        font-size: 16px;
+                        font-weight: 400;
+                    }
+
+                    #managerScreenshotItem, #clientScreenshotItem {
+                        height: 90vw;
+                        position: relative;
+                    }
+
+                    #managerScreenshotItem img, #clientScreenshotItem img {
+                        position: absolute;
+                        max-width: 90vw;
+                        top: 0;
+                    }
+
+                    :host(:dir(ltr)) #managerScreenshotItem img {
+                        right: -40px;
+                    }
+
+                    :host(:dir(rtl)) #managerScreenshotItem img {
+                        left: -40px;
+                    }
+
+                    :host(:dir(ltr)) #clientScreenshotItem img {
+                        left: -40px;
+                    }
+
+                    :host(:dir(rtl)) #clientScreenshotItem img {
+                        right: -40px;
+                    }
+
+                    .downloadControls {
+                        text-align: center;
+                    }
+
+                    #managerSection {
+                        background-color: #243239;
+                    }
+
+                    #clientSection {
+                        background-color: #2A383F;
+                    }
+
+                    udo-os-selector {
+                        display: flex;
+                        justify-content: space-around;
+                        flex-wrap: wrap;
+                    }
+
+                    p {
+                        font-size: 18px;
+                        line-height: 1.45em;
+                        font-weight: 400;
+                        color: #ECEFF1;
+                        max-width: 468px;
+                    }
+
+                    p {
+                        margin-top: 0;
+                    }
+
+                    .requirements {
+                        color: rgba(236, 239, 241, 0.54);
+                        font-size: 14px;
+                    }
+
+                    #managerSection, #clientSection {
+                        position: relative;
+                    }
+
+                    #managerSection, #clientSection {
+                        padding-bottom: 2em;
+                    }
+
+                    @media (min-width: 700px) {
+                        .contentWrapper {
+                            width:80%;
+                        }
+
+                        h4 {
+                            font-size: 36px;
+                        }
+
+                        udo-os-selector {
+                            width: 300px;
+                            justify-content: start;
+                        }
+
+                        .itemWrapperForIEAndFF {
+                            padding: 0;
+                        }
+
+                        :host(:dir(ltr)) .downloadControls {
+                            text-align: left;
+                        }
+
+                        :host(:dir(rtl)) .downloadControls {
+                            text-align: right;
+                        }
+
+                        #managerSection, #clientSection {
+                            padding-bottom: 4em;
+                        }
+
+                        #clientScreenshotItem img, #managerScreenshotItem img {
+                            max-height: 828px;
+                        }
+
+                        #managerDownloadButton, #clientDownloadButton {
+                            max-width: 300px;
+                        }
+                    }
+
+                    @media (min-width: 980px) {
+                        .item {
+                            justify-content:center;
+                            width: 50%;
+                        }
+
+                        .item {
+                            margin-bottom: 0;
+                        }
+
+                        #managerSection .flexGrid {
+                            flex-direction: row-reverse;
+                        }
+
+                        #clientSection .flexGrid {
+                            flex-direction: row;
+                        }
+
+                        #managerScreenshotItem, #clientScreenshotItem {
+                            height: 100%;
+                        }
+
+                        #managerScreenshotItem img {
+                            top: 4em;
+                        }
+
+                        :host(:dir(ltr)) #managerScreenshotItem img {
+                            left: 20px;
+                            right: auto;
+                        }
+
+                        :host(:dir(rtl)) #managerScreenshotItem img {
+                            right: 20px;
+                            left: auto;
+                        }
+
+                        #clientScreenshotItem img {
+                            top: 6em;
+                        }
+
+                        :host(:dir(ltr)) #clientScreenshotItem img {
+                            right: 50px;
+                            left: auto;
+                        }
+
+                        :host(:dir(rtl)) #clientScreenshotItem img {
+                            left: 50px;
+                            right: auto;
+                        }
+
+                        .itemWrapperForIEAndFF {
+                            padding: 120px 0;
+                        }
+
+                        :host(:dir(ltr)) #clientContentItem .itemWrapperForIEAndFF {
+                            margin-left: 8%;
+                        }
+
+                        :host(:dir(rtl)) #clientContentItem .itemWrapperForIEAndFF {
+                            margin-right: 8%;
+                        }
+                    }
+
+                    udo-os-selector {
+                        position: relative;
+                    }
+
+                    :host(:dir(ltr)) udo-os-selector {
+                        left: -20px;
+                    }
+
+                    :host(:dir(rtl)) udo-os-selector {
+                        right: -20px;
+                    }
+                </style>
+                <div id="managerSection">
+                    <div class="contentWrapper">
+                        <h3>1. [[localize('getOutlineManager')]]</h3>
+                        <div class="flexGrid">
+                            <div id="managerScreenshotItem" class="item">
+                                <img src$="[[imagesPath]]manager_screenshot@2x.png">
+                            </div>
+                            <div id="managerContentItem" class="item">
+                                <div class="itemWrapperForIEAndFF">
+                                    <img src$="[[imagesPath]]outline_manager.png">
+                                    <h4>[[localize('managerSubTitle')]]</h4>
+                                    <p>[[localize('managerText')]]</p>
+                                    <div class="downloadControls">
+                                        <a class="buttonLink" href$="[[managerDownloadLink]]">
+                                            <paper-button id="managerDownloadButton" hidden$="[[!selectedManagerOsId]]" on-click="reportEvent" data-event-category="download" data-event-label$="[[selectedManagerOsId]] manager">[[localize('getOutlineManager')]]</paper-button>
+                                        </a>
+                                        <p class="requirements">[[_getManagerRequirements(selectedManagerOsId)]]</p>
+                                        <udo-os-selector id="managerOSSelector" os-options="[[managerOSOptions]]" images-path="[[imagesPath]]"></udo-os-selector>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="clientSection">
+                    <div class="contentWrapper">
+                        <h3>2. [[localize('getOutline')]]</h3>
+                        <div class="flexGrid">
+                            <div id="clientScreenshotItem" class="item">
+                                <img src$="[[imagesPath]]clients_screenshot@2x.png">
+                            </div>
+                            <div id="clientContentItem" class="item client">
+                                <div class="itemWrapperForIEAndFF">
+                                    <img src$="[[imagesPath]]outline.png">
+                                    <h4>[[localize('clientSubTitle')]]</h4>
+                                    <p>[[localize('clientText')]]</p>
+                                    <div class="downloadControls">
+                                        <a class="buttonLink" href$="[[clientDownloadLink]]">
+                                            <paper-button id="clientDownloadButton" hidden$="[[!selectedClientOsId]]" on-click="reportEvent" data-event-category="download" data-event-label$="[[selectedClientOsId]] client">[[localize('getOutline')]]</paper-button>
+                                        </a>
+                                        <p class="requirements">[[_getClientRequirements(selectedClientOsId)]]</p>
+                                        <udo-os-selector id="clientOSSelector" os-options="[[clientOSOptions]]" images-path="[[imagesPath]]"></udo-os-selector>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+            <script>
+                var UdoDownload = function(_Polymer$DirMixin) {
+                    babelHelpers.inherits(UdoDownload, _Polymer$DirMixin);
+                    function UdoDownload() {
+                        babelHelpers.classCallCheck(this, UdoDownload);
+                        return babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(UdoDownload).apply(this, arguments))
+                    }
+                    babelHelpers.createClass(UdoDownload, [{
+                        key: "_computeClientDownloadLink",
+                        value: function _computeClientDownloadLink(selectedOsId) {
+                            return {
+                                Android: "https://play.google.com/store/apps/details?id=org.outline.android.client",
+                                "Chromium OS": "https://play.google.com/store/apps/details?id=org.outline.android.client",
+                                Windows: "https://raw.githubusercontent.com/Jigsaw-Code/outline-releases/master/client/stable/Outline-Client.exe",
+                                macOS: "https://itunes.apple.com/us/app/outline-app/id1356178125",
+                                iOS: "https://itunes.apple.com/us/app/outline-app/id1356177741",
+                                Linux: "https://raw.githubusercontent.com/Jigsaw-Code/outline-releases/master/client/stable/Outline-Client.AppImage"
+                            }[selectedOsId]
+                        }
+                    }, {
+                        key: "_computeManagerDownloadLink",
+                        value: function _computeManagerDownloadLink(selectedOsId) {
+                            var managerReleasesDir = "https://raw.githubusercontent.com/Jigsaw-Code/outline-releases/master/manager/stable/";
+                            return {
+                                Windows: managerReleasesDir + "Outline-Manager.exe",
+                                Linux: managerReleasesDir + "Outline-Manager.AppImage",
+                                macOS: managerReleasesDir + "Outline-Manager.dmg"
+                            }[selectedOsId]
+                        }
+                    }, {
+                        key: "_getManagerRequirements",
+                        value: function _getManagerRequirements(osId) {
+                            if ("Linux" === osId) {
+                                return this.localize("appImageInstructions")
+                            }
+                            var version = OsNegotiator.OUTLINE_SERVER_MANAGER_MIN_VERSION_BY_OS[osId];
+                            if (!version) {
+                                return ""
+                            }
+                            return this.localize("requirementString", "osId", osId, "version", version)
+                        }
+                    }, {
+                        key: "_getClientRequirements",
+                        value: function _getClientRequirements(osId) {
+                            if ("Linux" === osId) {
+                                return this.localize("appImageInstructions")
+                            }
+                            var version = OsNegotiator.OUTLINE_CLIENT_MIN_VERSION_BY_OS[osId] || "";
+                            if (!version) {
+                                return ""
+                            }
+                            var displayName = OsNegotiator.getDisplayName(osId);
+                            return this.localize("requirementString", "osId", displayName, "version", version)
+                        }
+                    }, {
+                        key: "ready",
+                        value: function ready() {
+                            var _this = this;
+                            babelHelpers.get(babelHelpers.getPrototypeOf(UdoDownload.prototype), "ready", this).call(this);
+                            this.$.managerOSSelector.addEventListener("osSelected", function(e) {
+                                _this.selectedManagerOsId = e.detail.id
+                            });
+                            this.$.clientOSSelector.addEventListener("osSelected", function(e) {
+                                _this.selectedClientOsId = e.detail.id
+                            });
+                            if (this.userOsId) {
+                                this.$.managerOSSelector.select(this.userOsId);
+                                this.$.clientOSSelector.select(this.userOsId)
+                            }
+                        }
+                    }, {
+                        key: "_shouldHideDownload",
+                        value: function _shouldHideDownload(selectedOsId) {
+                            return !selectedOsId
+                        }
+                    }], [{
+                        key: "is",
+                        get: function get() {
+                            return "udo-download"
+                        }
+                    }, {
+                        key: "properties",
+                        get: function get() {
+                            return {
+                                localize: Function,
+                                reportEvent: Function,
+                                imagesPath: String,
+                                managerDownloadLink: {
+                                    type: String,
+                                    computed: "_computeManagerDownloadLink(selectedManagerOsId)"
+                                },
+                                clientDownloadLink: {
+                                    type: String,
+                                    computed: "_computeClientDownloadLink(selectedClientOsId)"
+                                },
+                                userOsId: {
+                                    type: String,
+                                    readonly: !0,
+                                    value: function value() {
+                                        var userOsData = OsNegotiator.getOsData({});
+                                        return userOsData ? userOsData.id : null
+                                    }
+                                },
+                                managerOSOptions: {
+                                    type: Array,
+                                    value: [{
+                                        id: "Windows",
+                                        name: "Windows"
+                                    }, {
+                                        id: "Linux",
+                                        name: "Linux"
+                                    }, {
+                                        id: "macOS",
+                                        name: "macOS"
+                                    }]
+                                },
+                                clientOSOptions: {
+                                    type: Array,
+                                    value: [{
+                                        id: "Android",
+                                        name: "Android"
+                                    }, {
+                                        id: "Windows",
+                                        name: "Windows"
+                                    }, {
+                                        id: "Chromium OS",
+                                        name: "Chrome OS"
+                                    }, {
+                                        id: "iOS",
+                                        name: "iOS"
+                                    }, {
+                                        id: "macOS",
+                                        name: "macOS"
+                                    }, {
+                                        id: "Linux",
+                                        name: "Linux"
+                                    }]
+                                },
+                                selectedManagerOsId: {
+                                    type: String,
+                                    value: ""
+                                },
+                                selectedClientOsId: {
+                                    type: String,
+                                    value: ""
+                                }
+                            }
+                        }
+                    }]);
+                    return UdoDownload
+                }(Polymer.DirMixin(Polymer.Element));
+                window.customElements.define(UdoDownload.is, UdoDownload);
+            </script>
+        </dom-module>

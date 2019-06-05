@@ -1,0 +1,390 @@
+        <dom-module id="udo-home">
+            <template>
+                <style include="udo-styles">
+                    h1 {
+                        font-size: 48px;
+                        font-weight: 500;
+                        color: #ECEFF1;
+                        line-height: 1.25em;
+                        font-weight: 500;
+                    }
+
+                    h1 {
+                        margin-top: 2em;
+                    }
+
+                    :host(:dir(ltr)) h1 {
+                        text-align: left;
+                    }
+
+                    :host(:dir(rtl)) h1 {
+                        text-align: right;
+                    }
+
+                    #banner {
+                        max-width: 90%;
+                    }
+
+                    .bannerlinksWrapper {
+                        text-transform: uppercase;
+                        color: #fff;
+                        display: flex;
+                        align-items: center;
+                        font-size: 14px;
+                        font-weight: 500;
+                    }
+
+                    .bannerlinksWrapper {
+                        cursor: pointer;
+                    }
+
+                    #getOutlineLink {
+                        color: var(--app-teal-color);
+                    }
+
+                    :host(:dir(ltr)) #getOutlineLink {
+                        margin-right: 4em;
+                    }
+
+                    :host(:dir(rtl)) #getOutlineLink {
+                        margin-left: 4em;
+                    }
+
+                    .layoutColumn {
+                        display: flex;
+                        flex-flow: column nowrap;
+                        align-items: stretch;
+                        min-height: 448px;
+                    }
+
+                    .layoutColumn > * {
+                        flex-shrink: 0;
+                    }
+
+                    .feature {
+                        padding: 0 4% 156px 4%;
+                    }
+
+                    .feature p {
+                        font-size: 16px;
+                        line-height: 1.45em;
+                        font-weight: 400;
+                    }
+
+                    .alignBottomCenter {
+                        display: flex;
+                        flex-flow: row nowrap;
+                        align-items: flex-end;
+                        justify-content: center;
+                    }
+
+                    .highlight {
+                        color: black;
+                    }
+
+                    .highlight {
+                        background: white;
+                    }
+
+                    .intro {
+                        height: 100vh;
+                        max-height: 694px;
+                        width: 100%;
+                        position: relative;
+                    }
+
+                    .intro {
+                        background-color: #243239;
+                    }
+
+                    iron-image {
+                        position: absolute;
+                        width: 92vw;
+                        height: 92vw;
+                        bottom: 0;
+                        z-index: 1;
+                    }
+
+                    iron-image {
+                        margin: 0 4% 40px;
+                        background-color: #243239;
+                    }
+
+                    .intro .contentWrapper {
+                        position: relative;
+                        z-index: 10;
+                    }
+
+                    .screenshot img {
+                        display: block;
+                        width: 100%;
+                    }
+
+                    .overview .screenshot img {
+                        max-width: 656px;
+                    }
+
+                    .feature img {
+                        width: 100%;
+                    }
+
+                    .feature h3 {
+                        font-size: 28px;
+                        line-height: 1.25em;
+                        font-weight: 500;
+                    }
+
+                    .featuresWrapper {
+                        color: var(--app-primary-color);
+                    }
+
+                    .featuresWrapper {
+                        background-color: var(--primary-background-color);
+                    }
+
+                    #outlineFeatures {
+                        display: flex;
+                        flex-direction: column;
+                    }
+
+                    #outlineFeatures {
+                        padding-top: 30px;
+                    }
+
+                    #learnMoreRow {
+                        color: var(--app-primary-color);
+                    }
+
+                    #learnMoreRow {
+                        background-color: var(--primary-background-color);
+                        padding: 68px 0;
+                    }
+
+                    #whyOutlineTitle {
+                        font-size: 14px;
+                        font-weight: 500;
+                        color: var(--app-primary-color);
+                    }
+
+                    #whyOutlineTitle {
+                        background-color: var(--primary-background-color);
+                        text-align: center;
+                        margin: 0;
+                    }
+
+                    #getOutlineText {
+                        vertical-align: top;
+                    }
+
+                    #topText {
+                        width: 100%;
+                        font-size: 18px;
+                        line-height: 1.45em;
+                        font-weight: 400;
+                    }
+
+                    #topText:after {
+                        content: "";
+                        display: block;
+                        width: 28px;
+                        height: 3px;
+                    }
+
+                    #topText:after {
+                        margin-top: 40px;
+                        background: var(--app-primary-color);
+                    }
+
+                    @media (min-width: 960px) {
+                        .intro {
+                            max-height:1024px;
+                        }
+                    }
+
+                    @media (min-width: 700px) {
+                        iron-image {
+                            width:84%;
+                            height: calc(100% - 80px);
+                        }
+
+                        iron-image {
+                            margin: 40px 8%;
+                        }
+
+                        .intro {
+                            max-height: 920px;
+                        }
+
+                        h1 {
+                            font-size: 78px;
+                            line-height: 1.15em;
+                        }
+
+                        #banner {
+                            max-width: 500px;
+                        }
+
+                        #learnMoreRow {
+                            width: 100%;
+                        }
+
+                        #learnMoreRow {
+                            padding: 92px 0 146px;
+                        }
+
+                        #topText {
+                            width: 72%;
+                            font-size: 32px;
+                            line-height: 1.35em;
+                        }
+
+                        #outlineFeatures {
+                            flex-direction: row;
+                        }
+
+                        #outlineFeatures {
+                            padding-top: 56px;
+                        }
+
+                        .feature {
+                            width: 33%;
+                        }
+
+                        .feature {
+                            padding: 0 3% 268px 3%;
+                        }
+
+                        #whyOutlineTitle {
+                            font-size: 18px;
+                        }
+
+                        .feature h3 {
+                            font-size: 36px;
+                        }
+
+                        #privacyFeature {
+                            flex-direction: row-reverse;
+                        }
+
+                        #privacyFeature {
+                            padding-top: 176px;
+                        }
+
+                        #newsFeature {
+                            padding-top: 352px;
+                        }
+                    }
+
+                    @media (min-width: 700px) and (max-width: 980px) {
+                        h1 {
+                            font-size:64px;
+                        }
+
+                        .intro .contentWrapper {
+                            width: 90%;
+                        }
+
+                        #topText {
+                            font-size: 24px;
+                        }
+
+                        .feature h3 {
+                            font-size: 28px;
+                        }
+
+                        .feature h3 {
+                            margin-top: 0;
+                        }
+
+                        #outlineFeatures {
+                            flex-direction: column;
+                        }
+
+                        .feature {
+                            display: flex;
+                            flex-direction: row;
+                            width: 100%;
+                        }
+
+                        .feature {
+                            padding-bottom: 176px;
+                        }
+
+                        .feature div {
+                            width: 50%;
+                        }
+
+                        .feature div {
+                            padding: 0 5%;
+                        }
+
+                        .feature img {
+                            align-self: center;
+                            width: 50%;
+                        }
+
+                        #privacyFeature {
+                            flex-direction: row-reverse;
+                        }
+
+                        #privacyFeature {
+                            padding-top: 0px;
+                        }
+
+                        #newsFeature {
+                            padding-top: 0px;
+                        }
+                    }
+                </style>
+                <div class="layoutColumn">
+                    <div class="intro">
+                        <iron-image sizing="contain" fade="" preload="" src$="[[imagesPath]]bg-Oval.png"></iron-image>
+                        <div class="contentWrapper">
+                            <h1 id="banner">[[localize('bannerText')]]</h1>
+                            <div class="bannerlinksWrapper">
+                                <div id="getOutlineLink" on-tap="getStartedTapped">
+                                    <span class="getOutlineText">[[localize('getOutline')]]</span>
+                                </div>
+                                <div id="learnMoreTextWrapper" on-tap="learnMoreTapped">
+                                    <span class="learnMoreText">[[localize('learnMore')]]</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="learnMoreRow">
+                        <div class="contentWrapper">
+                            <div id="topText">[[localize('topText')]]</div>
+                        </div>
+                    </div>
+                    <div class="featuresWrapper">
+                        <div class="contentWrapper">
+                            <h3 id="whyOutlineTitle">[[localize('whyOutline')]]</h3>
+                            <div id="outlineFeatures">
+                                <div class="feature">
+                                    <img src$="[[imagesPath]]trust-2x.png">
+                                    <div>
+                                        <h3>[[localize('trustHeader')]]</h3>
+                                        <p inner-h-t-m-l="[[localize('trustText', 'rosReportUrl', 'https://s3.amazonaws.com/outline-vpn/static_downloads/ros-report.pdf', 'rosUrl', 'https://radicallyopensecurity.com/', 'cure53ReportUrl', 'https://s3.amazonaws.com/outline-vpn/static_downloads/cure53-report.pdf', 'cure53Url', 'https://cure53.de/')]]"></p>
+                                    </div>
+                                </div>
+                                <div id="privacyFeature" class="feature">
+                                    <img src$="[[imagesPath]]security-2x.png">
+                                    <div>
+                                        <h3>[[localize('privacyHeader')]]</h3>
+                                        <p inner-h-t-m-l="[[localize('privacyText')]]"></p>
+                                    </div>
+                                </div>
+                                <div id="newsFeature" class="feature">
+                                    <img src$="[[imagesPath]]news-2x.png">
+                                    <div>
+                                        <h3>[[localize('newsHeader')]]</h3>
+                                        <p inner-h-t-m-l="[[localize('newsText')]]"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <udo-download id="download" localize="[[localize]]" report-event="[[reportEvent]]" images-path="[[imagesPath]]"></udo-download>
+            </template>
+        </dom-module>

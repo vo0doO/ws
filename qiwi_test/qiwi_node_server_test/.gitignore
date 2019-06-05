@@ -1,0 +1,12 @@
+logs
+*.log
+npm-debug.log
+node_modules
+.npm
+.node_repl_history
+.idea
+*.bak
+build
+*.js
+*.js.map
+!/docs/**

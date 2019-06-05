@@ -1,0 +1,16 @@
+{
+  "name": "Outline - Making it safer to break the news",
+  "short_name": "Outline",
+  "description": "Outline - Making it safer to break the news",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#009688",
+  "background_color": "#009688",
+  "icons": [
+    {
+      "src": "img/logo-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

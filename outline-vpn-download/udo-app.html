@@ -1,0 +1,751 @@
+        <link rel="lazy-import" href="udo-home.html">
+        <link rel="lazy-import" href="udo-invite.html">
+        <link rel="lazy-import" href="udo-support.html">
+        <link rel="lazy-import" href="udo-error404.html">
+            <dom-module id="udo-styles">
+                <template>
+                    <style>
+                        * {
+                            --app-primary-color:#263238;--app-teal-color:#64FFDA;box-sizing: border-box;
+                        }
+
+                        a {
+                            text-decoration: none;
+                            color: inherit;
+                        }
+
+                        a {
+                            border-bottom: 1px solid rgba(0, 0, 0, .24);
+                        }
+
+                        a:hover {
+                            border-bottom: 1px solid #64FFDA;
+                        }
+
+                        paper-button {
+                            font-size: 14px;
+                        }
+
+                        :host(:dir(ltr)) paper-button {
+                            margin-left: 0;
+                            margin-right: 0;
+                        }
+
+                        :host(:dir(rtl)) paper-button {
+                            margin-right: 0;
+                            margin-left: 0;
+                        }
+
+                        p, ul {
+                            line-height: 2em;
+                            font-size: 14px;
+                        }
+
+                        h1 {
+                            font-weight: normal;
+                            line-height: 1.75em;
+                        }
+
+                        h2 {
+                            line-height: 1.45em;
+                        }
+
+                        .contentWrapper {
+                            width: 90%;
+                            max-width: 1280px;
+                        }
+
+                        .contentWrapper {
+                            margin: 0 auto;
+                        }
+
+                        .pageAnimated {
+                            position: relative;
+                            will-change: padding, opacity;
+                            min-height: 100vh;
+                        }
+
+                        :host(:dir(ltr)) .pageAnimated {
+                            animation-duration: 0.7s;
+                            animation-name: page-slide-in;
+                            animation-fill-mode: forwards;
+                            animation-timing-function: ease;
+                        }
+
+                        :host(:dir(rtl)) .pageAnimated {
+                            animation-duration: 0.7s;
+                            animation-name: page-slide-in;
+                            animation-fill-mode: forwards;
+                            animation-timing-function: ease;
+                        }
+
+                        @keyframes page-slide-in {
+                            0% {
+                                opacity: 0.65;
+                                padding-top: 40px;
+                            }
+
+                            100% {
+                                opacity: 1;
+                                padding-top: 0;
+                            }
+                        }
+
+                        .page--fade {
+                            will-change: opacity;
+                        }
+
+                        :host(:dir(ltr)) .page--fade {
+                            animation-duration: .7s;
+                            animation-name: page-fade-in;
+                            animation-fill-mode: forwards;
+                            animation-timing-function: ease;
+                        }
+
+                        :host(:dir(rtl)) .page--fade {
+                            animation-duration: .7s;
+                            animation-name: page-fade-in;
+                            animation-fill-mode: forwards;
+                            animation-timing-function: ease;
+                        }
+
+                        @keyframes page-fade-in {
+                            0% {
+                                opacity: 0;
+                            }
+
+                            100% {
+                                opacity: 1;
+                            }
+                        }
+
+                        @media (min-width: 700px) {
+                            .contentWrapper {
+                                width:80%;
+                            }
+                        }
+                    </style>
+                </template>
+            </dom-module>
+            <dom-module id="udo-footer">
+                <template>
+                    <style include="udo-styles">
+                        footer {
+                            color: var(--app-primary-color);
+                        }
+
+                        footer {
+                            padding: 5% 0;
+                            background-color: var(--primary-background-color);
+                        }
+
+                        #flexLayout {
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: space-between;
+                        }
+
+                        h3 {
+                            font-weight: 500;
+                            font-size: 16px;
+                        }
+
+                        .footerSection {
+                            box-sizing: border-box;
+                        }
+
+                        :host(:dir(ltr)) .footerSection {
+                            text-align: left;
+                        }
+
+                        :host(:dir(rtl)) .footerSection {
+                            text-align: right;
+                        }
+
+                        p {
+                            font-size: 16px;
+                            line-height: 1.45em;
+                            font-weight: 400;
+                        }
+
+                        #footerNav a {
+                            border-width: 0px;
+                        }
+
+                        #footerNav a {
+                            line-height: 2em;
+                        }
+
+                        #footerNav a {
+                            border-width: 0px;
+                        }
+
+                        #jigsawLogo {
+                            margin-top: 256px;
+                        }
+
+                        .imageLink, .imageLink:hover {
+                            border: none;
+                        }
+
+                        @media (min-width: 700px) {
+                            #flexLayout {
+                                flex-direction:row;
+                            }
+
+                            .footerSection {
+                                width: 33%;
+                            }
+
+                            :host(:dir(ltr)) .footerSection {
+                                padding-right: 5%;
+                            }
+
+                            :host(:dir(rtl)) .footerSection {
+                                padding-left: 5%;
+                            }
+
+                            .footerSection:last-of-type {
+                                width: 248px;
+                            }
+
+                            :host(:dir(ltr)) .footerSection:last-of-type {
+                                padding-right: 0;
+                            }
+
+                            :host(:dir(rtl)) .footerSection:last-of-type {
+                                padding-left: 0;
+                            }
+                        }
+                    </style>
+                    <footer>
+                        <div class="contentWrapper page--fade">
+                            <div id="flexLayout">
+                                <div class="footerSection">
+                                    <h3>[[localize('aboutUs')]]</h3>
+                                    <p inner-h-t-m-l="[[localize('footerTextFirst')]]"></p>
+                                </div>
+                                <div class="footerSection">
+                                    <h3>[[localize('getInvolved')]]</h3>
+                                    <p inner-h-t-m-l="[[localize('footerTextSecond', 'shadowsocksUrl', 'https://shadowsocks.org', 'gitHubUrl', 'https://github.com/Jigsaw-Code/?q=outline', 'mediumUrl', 'https://medium.com/jigsaw', 'redditUrl', 'https://www.reddit.com/r/outlinevpn/')]]"></p>
+                                </div>
+                                <div class="footerSection">
+                                    <p id="footerNav">
+                                        <a href$="[[urlForPage('support')]]">[[localize('helpCenter')]]</a>
+                                        <br>
+                                        <a href="https://github.com/Jigsaw-Code/?q=outline">GitHub</a>
+                                        <br>
+                                        <a href="https://s3.amazonaws.com/outline-vpn/static_downloads/Outline-Terms-of-Service.html">[[localize('termsOfService')]]</a>
+                                        <br>
+                                        <a a="" href$="[[urlForPage('support', null, 'dataCollection')]]">[[localize('dataCollectionPolicy')]]</a>
+                                        <br>
+                                        <a href="https://www.google.com/policies/privacy/">[[localize('privacyPolicy')]]</a>
+                                    </p>
+                                </div>
+                            </div>
+                            <a href="https://jigsaw.google.com" class="imageLink">
+                                <img id="jigsawLogo" src$="[[imagesPath]]jigsaw-logo.svg">
+                            </a>
+                        </div>
+                    </footer>
+                </template>
+                <script>
+                    var UdoFooter = function(_Polymer$DirMixin) {
+                        babelHelpers.inherits(UdoFooter, _Polymer$DirMixin);
+                        function UdoFooter() {
+                            babelHelpers.classCallCheck(this, UdoFooter);
+                            return babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(UdoFooter).apply(this, arguments))
+                        }
+                        babelHelpers.createClass(UdoFooter, null, [{
+                            key: "is",
+                            get: function get() {
+                                return "udo-footer"
+                            }
+                        }, {
+                            key: "properties",
+                            get: function get() {
+                                return {
+                                    localize: Function,
+                                    imagesPath: String,
+                                    urlForPage: Function
+                                }
+                            }
+                        }]);
+                        return UdoFooter
+                    }(Polymer.DirMixin(Polymer.Element));
+                    window.customElements.define(UdoFooter.is, UdoFooter);
+                </script>
+            </dom-module>
+            <dom-module id="app-header" assetpath="../bower_components/app-layout/app-header/">
+                <template>
+                    <style>
+                        :host {
+                            position: relative;
+                            display: block;
+                            transition-timing-function: linear;
+                            transition-property: -webkit-transform;
+                            transition-property: transform;
+                        }
+
+                        :host::before {
+                            position: absolute;
+                            right: 0px;
+                            bottom: -5px;
+                            left: 0px;
+                            width: 100%;
+                            height: 5px;
+                            content: "";
+                            transition: opacity 0.4s;
+                            pointer-events: none;
+                            opacity: 0;
+                            box-shadow: inset 0px 5px 6px -3px rgba(0, 0, 0, 0.4);
+                            will-change: opacity;
+                            @apply --app-header-shadow;}
+
+                        :host([shadow])::before {
+                            opacity: 1;
+                        }
+
+                        #background {
+                            @apply --layout-fit;overflow: hidden;
+                        }
+
+                        #backgroundFrontLayer, #backgroundRearLayer {
+                            @apply --layout-fit;height: 100%;
+                            pointer-events: none;
+                            background-size: cover;
+                        }
+
+                        #backgroundFrontLayer {
+                            @apply --app-header-background-front-layer;}
+
+                        #backgroundRearLayer {
+                            opacity: 0;
+                            @apply --app-header-background-rear-layer;}
+
+                        #contentContainer {
+                            position: relative;
+                            width: 100%;
+                            height: 100%;
+                        }
+
+                        :host([disabled]), :host([disabled])::after, :host([disabled]) #backgroundFrontLayer, :host([disabled]) #backgroundRearLayer, /* Silent scrolling should not run CSS transitions */
+                        :host([silent-scroll]), :host([silent-scroll])::after, :host([silent-scroll]) #backgroundFrontLayer, :host([silent-scroll]) #backgroundRearLayer {
+                            transition: none !important;
+                        }
+
+                        :host([disabled]) ::slotted(app-toolbar:first-of-type), :host([disabled]) ::slotted([sticky]), /* Silent scrolling should not run CSS transitions */
+                        :host([silent-scroll]) ::slotted(app-toolbar:first-of-type), :host([silent-scroll]) ::slotted([sticky]) {
+                            transition: none !important;
+                        }
+                    </style>
+                    <div id="contentContainer">
+                        <slot id="slot"></slot>
+                    </div>
+                </template>
+                <script>
+                    Polymer({
+                        is: "app-header",
+                        behaviors: [Polymer.AppScrollEffectsBehavior, Polymer.AppLayoutBehavior],
+                        properties: {
+                            condenses: {
+                                type: Boolean,
+                                value: !1
+                            },
+                            fixed: {
+                                type: Boolean,
+                                value: !1
+                            },
+                            reveals: {
+                                type: Boolean,
+                                value: !1
+                            },
+                            shadow: {
+                                type: Boolean,
+                                reflectToAttribute: !0,
+                                value: !1
+                            }
+                        },
+                        observers: ["_configChanged(isAttached, condenses, fixed)"],
+                        _height: 0,
+                        _dHeight: 0,
+                        _stickyElTop: 0,
+                        _stickyElRef: null,
+                        _top: 0,
+                        _progress: 0,
+                        _wasScrollingDown: !1,
+                        _initScrollTop: 0,
+                        _initTimestamp: 0,
+                        _lastTimestamp: 0,
+                        _lastScrollTop: 0,
+                        get _maxHeaderTop() {
+                            return this.fixed ? this._dHeight : this._height + 5
+                        },
+                        get _stickyEl() {
+                            if (this._stickyElRef) {
+                                return this._stickyElRef
+                            }
+                            for (var nodes = Polymer.dom(this.$.slot).getDistributedNodes(), i = 0, node; node = nodes[i]; i++) {
+                                if (node.nodeType === Node.ELEMENT_NODE) {
+                                    if (node.hasAttribute("sticky")) {
+                                        this._stickyElRef = node;
+                                        break
+                                    } else if (!this._stickyElRef) {
+                                        this._stickyElRef = node
+                                    }
+                                }
+                            }
+                            return this._stickyElRef
+                        },
+                        _configChanged: function _configChanged() {
+                            this.resetLayout();
+                            this._notifyLayoutChanged()
+                        },
+                        _updateLayoutStates: function _updateLayoutStates() {
+                            if (0 === this.offsetWidth && 0 === this.offsetHeight) {
+                                return
+                            }
+                            var scrollTop = this._clampedScrollTop
+                              , firstSetup = 0 === this._height || 0 === scrollTop
+                              , currentDisabled = this.disabled;
+                            this._height = this.offsetHeight;
+                            this._stickyElRef = null;
+                            this.disabled = !0;
+                            if (!firstSetup) {
+                                this._updateScrollState(0, !0)
+                            }
+                            if (this._mayMove()) {
+                                this._dHeight = this._stickyEl ? this._height - this._stickyEl.offsetHeight : 0
+                            } else {
+                                this._dHeight = 0
+                            }
+                            this._stickyElTop = this._stickyEl ? this._stickyEl.offsetTop : 0;
+                            this._setUpEffect();
+                            if (firstSetup) {
+                                this._updateScrollState(scrollTop, !0)
+                            } else {
+                                this._updateScrollState(this._lastScrollTop, !0);
+                                this._layoutIfDirty()
+                            }
+                            this.disabled = currentDisabled
+                        },
+                        _updateScrollState: function _updateScrollState(scrollTop, forceUpdate) {
+                            var _Mathabs = Math.abs;
+                            if (0 === this._height) {
+                                return
+                            }
+                            var progress = 0
+                              , top = 0
+                              , lastTop = this._top
+                              , lastScrollTop = this._lastScrollTop
+                              , maxHeaderTop = this._maxHeaderTop
+                              , dScrollTop = scrollTop - this._lastScrollTop
+                              , absDScrollTop = _Mathabs(dScrollTop)
+                              , isScrollingDown = scrollTop > this._lastScrollTop
+                              , now = performance.now();
+                            if (this._mayMove()) {
+                                top = this._clamp(this.reveals ? lastTop + dScrollTop : scrollTop, 0, maxHeaderTop)
+                            }
+                            if (scrollTop >= this._dHeight) {
+                                top = this.condenses && !this.fixed ? Math.max(this._dHeight, top) : top;
+                                this.style.transitionDuration = "0ms"
+                            }
+                            if (this.reveals && !this.disabled && 100 > absDScrollTop) {
+                                if (300 < now - this._initTimestamp || this._wasScrollingDown !== isScrollingDown) {
+                                    this._initScrollTop = scrollTop;
+                                    this._initTimestamp = now
+                                }
+                                if (scrollTop >= maxHeaderTop) {
+                                    if (30 < _Mathabs(this._initScrollTop - scrollTop) || 10 < absDScrollTop) {
+                                        if (isScrollingDown && scrollTop >= maxHeaderTop) {
+                                            top = maxHeaderTop
+                                        } else if (!isScrollingDown && scrollTop >= this._dHeight) {
+                                            top = this.condenses && !this.fixed ? this._dHeight : 0
+                                        }
+                                        var scrollVelocity = dScrollTop / (now - this._lastTimestamp);
+                                        this.style.transitionDuration = this._clamp((top - lastTop) / scrollVelocity, 0, 300) + "ms"
+                                    } else {
+                                        top = this._top
+                                    }
+                                }
+                            }
+                            if (0 === this._dHeight) {
+                                progress = 0 < scrollTop ? 1 : 0
+                            } else {
+                                progress = top / this._dHeight
+                            }
+                            if (!forceUpdate) {
+                                this._lastScrollTop = scrollTop;
+                                this._top = top;
+                                this._wasScrollingDown = isScrollingDown;
+                                this._lastTimestamp = now
+                            }
+                            if (forceUpdate || progress !== this._progress || lastTop !== top || 0 === scrollTop) {
+                                this._progress = progress;
+                                this._runEffects(progress, top);
+                                this._transformHeader(top)
+                            }
+                        },
+                        _mayMove: function _mayMove() {
+                            return this.condenses || !this.fixed
+                        },
+                        willCondense: function willCondense() {
+                            return 0 < this._dHeight && this.condenses
+                        },
+                        isOnScreen: function isOnScreen() {
+                            return 0 !== this._height && this._top < this._height
+                        },
+                        isContentBelow: function isContentBelow() {
+                            return 0 === this._top ? 0 < this._clampedScrollTop : 0 <= this._clampedScrollTop - this._maxHeaderTop
+                        },
+                        _transformHeader: function _transformHeader(y) {
+                            this.translate3d(0, -y + "px", 0);
+                            if (this._stickyEl) {
+                                this.translate3d(0, this.condenses && y >= this._stickyElTop ? Math.min(y, this._dHeight) - this._stickyElTop + "px" : 0, 0, this._stickyEl)
+                            }
+                        },
+                        _clamp: function _clamp(v, min, max) {
+                            return Math.min(max, Math.max(min, v))
+                        },
+                        _ensureBgContainers: function _ensureBgContainers() {
+                            if (!this._bgContainer) {
+                                this._bgContainer = document.createElement("div");
+                                this._bgContainer.id = "background";
+                                this._bgRear = document.createElement("div");
+                                this._bgRear.id = "backgroundRearLayer";
+                                this._bgContainer.appendChild(this._bgRear);
+                                this._bgFront = document.createElement("div");
+                                this._bgFront.id = "backgroundFrontLayer";
+                                this._bgContainer.appendChild(this._bgFront);
+                                Polymer.dom(this.root).insertBefore(this._bgContainer, this.$.contentContainer)
+                            }
+                        },
+                        _getDOMRef: function _getDOMRef(id) {
+                            switch (id) {
+                            case "backgroundFrontLayer":
+                                this._ensureBgContainers();
+                                return this._bgFront;
+                            case "backgroundRearLayer":
+                                this._ensureBgContainers();
+                                return this._bgRear;
+                            case "background":
+                                this._ensureBgContainers();
+                                return this._bgContainer;
+                            case "mainTitle":
+                                return Polymer.dom(this).querySelector("[main-title]");
+                            case "condensedTitle":
+                                return Polymer.dom(this).querySelector("[condensed-title]");
+                            }
+                            return null
+                        },
+                        getScrollState: function getScrollState() {
+                            return {
+                                progress: this._progress,
+                                top: this._top
+                            }
+                        }
+                    });
+                </script>
+            </dom-module>
+            <dom-module id="app-toolbar" assetpath="../bower_components/app-layout/app-toolbar/">
+                <template>
+                    <style>
+                        :host {
+                            @apply --layout-horizontal;@apply --layout-center;position: relative;
+                            height: 64px;
+                            padding: 0 16px;
+                            pointer-events: none;
+                            font-size: var(--app-toolbar-font-size, 20px);
+                        }
+
+                        :host ::slotted(*) {
+                            pointer-events: auto;
+                        }
+
+                        :host ::slotted(paper-icon-button) {
+                            font-size: 0;
+                        }
+
+                        :host ::slotted([main-title]), :host ::slotted([condensed-title]) {
+                            pointer-events: none;
+                            @apply --layout-flex;}
+
+                        :host ::slotted([bottom-item]) {
+                            position: absolute;
+                            right: 0;
+                            bottom: 0;
+                            left: 0;
+                        }
+
+                        :host ::slotted([top-item]) {
+                            position: absolute;
+                            top: 0;
+                            right: 0;
+                            left: 0;
+                        }
+
+                        :host ::slotted([spacer]) {
+                            margin-left: 64px;
+                        }
+                    </style>
+                    <slot></slot>
+                </template>
+                <script>
+                    Polymer({
+                        is: "app-toolbar"
+                    });
+                </script>
+            </dom-module>
+            <script>
+                Polymer.PaperRippleBehavior = {
+                    properties: {
+                        noink: {
+                            type: Boolean,
+                            observer: "_noinkChanged"
+                        },
+                        _rippleContainer: {
+                            type: Object
+                        }
+                    },
+                    _buttonStateChanged: function _buttonStateChanged() {
+                        if (this.focused) {
+                            this.ensureRipple()
+                        }
+                    },
+                    _downHandler: function _downHandler(event) {
+                        Polymer.IronButtonStateImpl._downHandler.call(this, event);
+                        if (this.pressed) {
+                            this.ensureRipple(event)
+                        }
+                    },
+                    ensureRipple: function ensureRipple(optTriggeringEvent) {
+                        if (!this.hasRipple()) {
+                            this._ripple = this._createRipple();
+                            this._ripple.noink = this.noink;
+                            var rippleContainer = this._rippleContainer || this.root;
+                            if (rippleContainer) {
+                                Polymer.dom(rippleContainer).appendChild(this._ripple)
+                            }
+                            if (optTriggeringEvent) {
+                                var domContainer = Polymer.dom(this._rippleContainer || this)
+                                  , target = Polymer.dom(optTriggeringEvent).rootTarget;
+                                if (domContainer.deepContains(target)) {
+                                    this._ripple.uiDownAction(optTriggeringEvent)
+                                }
+                            }
+                        }
+                    },
+                    getRipple: function getRipple() {
+                        this.ensureRipple();
+                        return this._ripple
+                    },
+                    hasRipple: function hasRipple() {
+                        return !!this._ripple
+                    },
+                    _createRipple: function _createRipple() {
+                        var element = document.createElement("paper-ripple");
+                        return element
+                    },
+                    _noinkChanged: function _noinkChanged(noink) {
+                        if (this.hasRipple()) {
+                            this._ripple.noink = noink
+                        }
+                    }
+                };
+            </script>
+            <script>
+                Polymer.PaperInkyFocusBehaviorImpl = {
+                    observers: ["_focusedChanged(receivedFocusFromKeyboard)"],
+                    _focusedChanged: function _focusedChanged(receivedFocusFromKeyboard) {
+                        if (receivedFocusFromKeyboard) {
+                            this.ensureRipple()
+                        }
+                        if (this.hasRipple()) {
+                            this._ripple.holdDown = receivedFocusFromKeyboard
+                        }
+                    },
+                    _createRipple: function _createRipple() {
+                        var ripple = Polymer.PaperRippleBehavior._createRipple();
+                        ripple.id = "ink";
+                        ripple.setAttribute("center", "");
+                        ripple.classList.add("circle");
+                        return ripple
+                    }
+                };
+                Polymer.PaperInkyFocusBehavior = [Polymer.IronButtonState, Polymer.IronControlState, Polymer.PaperRippleBehavior, Polymer.PaperInkyFocusBehaviorImpl];
+            </script>
+            <dom-module id="paper-icon-button" assetpath="../bower_components/paper-icon-button/">
+                <template strip-whitespace="">
+                    <style>
+                        :host {
+                            display: inline-block;
+                            position: relative;
+                            padding: 8px;
+                            outline: none;
+                            -webkit-user-select: none;
+                            -moz-user-select: none;
+                            -ms-user-select: none;
+                            user-select: none;
+                            cursor: pointer;
+                            z-index: 0;
+                            line-height: 1;
+                            width: 40px;
+                            height: 40px;
+                            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+                            -webkit-tap-highlight-color: transparent;
+                            box-sizing: border-box !important;
+                            @apply --paper-icon-button;}
+
+                        :host #ink {
+                            color: var(--paper-icon-button-ink-color, var(--primary-text-color));
+                            opacity: 0.6;
+                        }
+
+                        :host([disabled]) {
+                            color: var(--paper-icon-button-disabled-text, var(--disabled-text-color));
+                            pointer-events: none;
+                            cursor: auto;
+                            @apply --paper-icon-button-disabled;}
+
+                        :host([hidden]) {
+                            display: none !important;
+                        }
+
+                        :host(:hover) {
+                            @apply --paper-icon-button-hover;}
+
+                        iron-icon {
+                            --iron-icon-width:100%;--iron-icon-height:100%;}
+                    </style>
+                    <iron-icon id="icon" src="[[src]]" icon="[[icon]]" alt$="[[alt]]"></iron-icon>
+                </template>
+                <script>
+                    Polymer({
+                        is: "paper-icon-button",
+                        hostAttributes: {
+                            role: "button",
+                            tabindex: "0"
+                        },
+                        behaviors: [Polymer.PaperInkyFocusBehavior],
+                        properties: {
+                            src: {
+                                type: String
+                            },
+                            icon: {
+                                type: String
+                            },
+                            alt: {
+                                type: String,
+                                observer: "_altChanged"
+                            }
+                        },
+                        _altChanged: function _altChanged(newValue, oldValue) {
+                            var label = this.getAttribute("aria-label");
+                            if (!label || oldValue == label) {
+                                this.setAttribute("aria-label", newValue)
+                            }
+                        }
+                    });
+                </script>
+            </dom-module>
+        </dom-module>

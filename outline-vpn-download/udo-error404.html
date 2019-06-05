@@ -1,0 +1,61 @@
+        <dom-module id="udo-error404">
+            <template>
+                <style include="udo-styles">
+                    .card {
+                        position: absolute;
+                        top: 50%;
+                        @apply --shadow-elevation-2dp;color: var(--google-grey-700);
+                        font-size: .9rem;
+                        line-height: 24px;
+                        min-width: 280px;
+                        max-width: 420px;
+                    }
+
+                    .card {
+                        background-color: var(--primary-background-color);
+                        border-radius: 5px;
+                        padding: 0;
+                        text-align: center;
+                        padding: 20px;
+                    }
+
+                    :host(:dir(ltr)) .card {
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                    }
+
+                    :host(:dir(rtl)) .card {
+                        right: 50%;
+                        transform: translate(50%, -50%);
+                    }
+
+                    :host {
+                        color: #fff;
+                    }
+
+                    :host {
+                        padding-top: 108px;
+                    }
+
+                    p:first-of-type {
+                        font-size: 82px;
+                    }
+
+                    p:first-of-type {
+                        margin: 0;
+                    }
+
+                    p {
+                        font-size: 18px;
+                    }
+
+                    p {
+                        text-align: center;
+                    }
+                </style>
+                <div class="card">
+                    <p>ðŸ˜¯</p>
+                    <p inner-h-t-m-l="[[localize('pageNotFoundBody', 'homeLink', homeLink)]]"></p>
+                </div>
+            </template>
+        </dom-module>

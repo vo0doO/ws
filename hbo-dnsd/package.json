@@ -1,0 +1,26 @@
+{
+  "author": {
+    "name": "Jason Smith",
+    "email": "jhs@iriscouch.com",
+    "url": "http://www.iriscouch.com"
+  },
+  "dependencies": {
+    "defaultable": "~0.7.2",
+    "optimist": "~0.3.4"
+  },
+  "description": "Dynamic authoritative name server for Iris services",
+  "devDependencies": {
+    "tap": "~0.2.5"
+  },
+  "engines": {
+    "node": ">= 0.8"
+  },
+  "homepage": "https://github.com/hbouvier/dnsd#readme",
+  "main": "./named.js",
+  "name": "hbo-dnsd",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hbouvier/dnsd.git"
+  },
+  "version": "0.9.8"
+}
